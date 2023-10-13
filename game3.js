@@ -422,7 +422,9 @@ var get_redouble = function(){
     var ai_name = document.querySelector('#p'+parseInt(_data.playeri+1)+'');
     ai_name = ai_name.querySelectorAll('div')
     if(ai_name[1].innerHTML[3]+ai_name[1].innerHTML[4] == 'AI'){
-        _data.magnification += 3*_data.aiplayer;
+        for(var i=0;i<_data.aiplayer;i++){
+            _data.magnification += parseInt(Math.random()*4);
+        }
         var now_magnification = document.querySelector('.status-box');
         now_magnification = now_magnification.querySelectorAll('div');
         now_magnification[3].innerHTML = '总倍率: '+ _data.magnification+''
@@ -663,12 +665,10 @@ var get_dice = function(){
             var get_dices = document.querySelector('.dice');
             get_dices = get_dices.querySelectorAll('div');
             if(_data.rounds == 1){
-                AIwork();
+                AIwork1();
             }
             else if(_data.rounds == 2){
-                // if((get_dices[i].innerHTML[15]) > 4){
-                //     eval('dice'+i+'_click()')
-                // }
+                AIwork2();
             }
             else if(_data.rounds == 3){
                 eval('dice'+i+'_click()')
@@ -688,7 +688,8 @@ var ai_name = function(){
     }
 }
 
-function AIwork(){
+// AI算法1
+function AIwork1(){
 	var a2 = new Array(0,0,0,0,0)
     var a1 = new Array(0,0,0,0,0)
 	for(var i=0;i<5;i++){
@@ -873,6 +874,140 @@ function AIwork(){
 	}
 }
 
+// AI算法2
+function AIwork2(){
+	var a2 = new Array(0,0,0,0,0)
+    var b = new Array(0,0,0,0,0)
+	var num1 = 0;
+	var num2 = 4;
+    var a1 = new Array(0,0,0,0,0)
+
+	for(var i=0;i<5;i++){
+		if(_play.playersArray[_data.playeri].changes[i] === 1){
+			var dice1 = document.querySelector('.dice')
+    		dice1 = dice1.querySelectorAll('div')
+			a2[num1] = parseInt(dice1[i].innerHTML[15]);
+			num1++
+		}
+	}
+	for(var i=3;i<8;i++){
+		var dice2 = document.querySelector('#p'+_data.playeri+'')
+    	dice2 = dice2.querySelectorAll('div')
+		if(parseInt(dice2[i].innerHTML[15]) != NaN){
+			b[num2] = parseInt(dice2[i].innerHTML[15]);
+			num2--
+		}
+	}
+	for(var i=0;i<5;i++){
+		if(a2[i] == 0){
+			a2[i] = b[i];
+		}
+	}
+
+	for(var i=0;i<5;i++){
+        a1[i] = a2[i];
+    }
+    var num = 0,zero1 = 0,zero2 = 0,one = 0;
+    var b = new Array(0,0,0,0);
+    var c = new Array(0,0,0);
+    a1.sort((x,y)=> x - y)
+
+    for(var i=0;i<4;i++){
+        b[i] = Math.abs(a1[i+1]-a1[i]);
+        }
+    for(var i=0;i<3;i++){
+        c[i] =  Math.abs(b[i+1]-b[i]);
+    }
+    for(var i=0;i<4;i++){
+        if(b[i] == 1) one++;
+        else if(b[i] == 0) zero1++;
+    }
+    for(var i=0;i<3;i++){
+        if(c[i] == 0) zero2++;
+    }
+	let counts = Array(6).fill(0);
+	for (let i = 0; i < a2.length; i++) {  
+        if (a2[i] == 1) {  
+            counts[0]++;  
+        } else if (a2[i] == 2) {  
+            counts[1]++;  
+        } else if (a2[i] == 3) {  
+            counts[2]++;  
+        } else if (a2[i] == 4) {  
+            counts[3]++;  
+        } else if (a2[i] == 5) {  
+            counts[4]++;  
+        } else if (a2[i] == 6) {  
+            counts[5]++;  
+        }  
+    }//对出现的数字进行计数
+	
+	if (countOccurrences(counts,5)===1){
+		// 五连
+		for(var i=0;i<5;i++){
+			if(_play.playersArray[_data.playeri].changes[i] === 1){
+				eval('dice'+i+'_click()')
+			}
+		}
+	}
+	else if (countOccurrences(counts,4)===1&&countOccurrences(counts,1)===1){
+		//4连 锁四个相同的
+		for(var i=0;i<5;i++){
+			if(_play.playersArray[_data.playeri].changes[i] === 1){
+				eval('dice'+i+'_click()')
+			}
+		}
+	}
+	else if(countOccurrences(counts,3)===1&&countOccurrences(counts,2)===1){
+		//葫芦 锁3个相同的
+		for(var i=0;i<5;i++){
+			if(_play.playersArray[_data.playeri].changes[i] === 1){
+				eval('dice'+i+'_click()')
+			}
+		}
+	}
+	else if(one == 4){
+		//大顺子 全部锁
+		for(var i=0;i<5;i++){
+			if(_play.playersArray[_data.playeri].changes[i] === 1){
+				eval('dice'+i+'_click()')
+			}
+		}
+	}
+	else if(one == 3 && zero1 == 1){
+		for(var i=0;i<5;i++){
+			if(_play.playersArray[_data.playeri].changes[i] === 1){
+				eval('dice'+i+'_click()')
+			}
+		}
+	}
+	else if(one == 3 && zero1 == 0 && zero2 == 2){
+		for(var i=0;i<5;i++){
+			if(_play.playersArray[_data.playeri].changes[i] === 1){
+				eval('dice'+i+'_click()')
+			}
+		}
+	}
+	else if(countOccurrences(counts,2)===2&&countOccurrences(counts,1)===1){	
+		//双对 锁最大的俩个相同数字
+		for(var i=0;i<5;i++){
+			if(_play.playersArray[_data.playeri].changes[i] === 1){
+				eval('dice'+i+'_click()')
+			}
+		}
+	}
+	else {
+        var dice_1 = document.querySelector('.dice')
+		dice_1 = dice_1.querySelectorAll('div')
+        for(var i=0;i<5;i++){
+            if(parseInt(dice_1[i].innerHTML[15]) > 4){
+                eval('dice'+i+'_click()')
+            }
+        }
+	}
+}
+
+// 辅助函数
 function findIndex(arr, num) {  
     for (let i = 0; i < arr.length; i++) {  
       if (arr[i] === num) {  
@@ -881,7 +1016,8 @@ function findIndex(arr, num) {
     }  
     return -1;  
 }
-  
+
+// 辅助函数
 function countOccurrences(array, number) {  
     let count = 0;  
     for(let i = 0; i < array.length; i++) {  
