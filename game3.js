@@ -867,7 +867,7 @@ function AIwork1(){
         var dice_1 = document.querySelector('.dice')
 		dice_1 = dice_1.querySelectorAll('div')
         for(var i=0;i<5;i++){
-            if(parseInt(dice_1[i].innerHTML[15]) > 4){
+            if(parseInt(dice_1[i].innerHTML[15]) > 5){
                 eval('dice'+i+'_click()')
             }
         }
@@ -1000,7 +1000,7 @@ function AIwork2(){
         var dice_1 = document.querySelector('.dice')
 		dice_1 = dice_1.querySelectorAll('div')
         for(var i=0;i<5;i++){
-            if(parseInt(dice_1[i].innerHTML[15]) > 4){
+            if(parseInt(dice_1[i].innerHTML[15]) > 5){
                 eval('dice'+i+'_click()')
             }
         }
