@@ -332,6 +332,7 @@ var redouble0_click = function(){
     $(".redouble1").hide();
     $(".redouble2").hide();
     $(".redouble3").hide();
+    $(".lock").show();
     _data.magnification += _data.redouble_result;
     var now_magnification = document.querySelector('.status-box');
     now_magnification = now_magnification.querySelectorAll('div');
@@ -355,6 +356,7 @@ var redouble1_click = function(){
     $(".redouble1").hide();
     $(".redouble2").hide();
     $(".redouble3").hide();
+    $(".lock").show();
     _data.magnification += _data.redouble_result;
     var now_magnification = document.querySelector('.status-box');
     now_magnification = now_magnification.querySelectorAll('div');
@@ -378,6 +380,7 @@ var redouble2_click = function(){
     $(".redouble1").hide();
     $(".redouble2").hide();
     $(".redouble3").hide();
+    $(".lock").show();
     _data.magnification += _data.redouble_result;
     var now_magnification = document.querySelector('.status-box');
     now_magnification = now_magnification.querySelectorAll('div');
@@ -401,6 +404,7 @@ var redouble3_click = function(){
     $(".redouble1").hide();
     $(".redouble2").hide();
     $(".redouble3").hide();
+    $(".lock").show();
     _data.magnification += _data.redouble_result;
     var now_magnification = document.querySelector('.status-box');
     now_magnification = now_magnification.querySelectorAll('div');
@@ -441,6 +445,7 @@ var get_redouble = function(){
     $(".redouble1").show();
     $(".redouble2").show();
     $(".redouble3").show();
+    $(".lock").hide();
     _dataplayeriup();
 }
 
