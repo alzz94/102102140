@@ -51,6 +51,34 @@ var do_open = function(){
     letsgo();
 }
 
+// 规则功能
+var howtoplay = function(){
+    var txt1='\
+    <div class="teach">\
+        <div class="teach_play">\
+        <h2 align="center">骰子大战</h2>\
+        <h3>基本规则</h3>\
+        <p>进入游戏,选择对战模式后,可以设置游戏局数,初始筹码数,玩家个数,AI个数和初始倍率。</p>\
+        <p>点击开始后，进入对战页面，每一局游戏内有三轮投掷机会，玩家一人一次轮流投掷骰子,每个玩家有5个骰子。</p>\
+        <p>前两次投掷骰子之后可以选择锁定0~5个骰子,锁定的骰子位于选定区域不再改变。</p>\
+        <p>前两轮每轮投掷结束并在所有玩家锁定骰子后,每位玩家可以选择增加倍率:0,1,2,3。选择完成后进入下一轮。</p>\
+        <p>第三轮投掷结束后，锁定剩下的骰子进行计分（得分为五个骰子的点数总和+奖励分），得出最终结果，筹码划分。</p>\
+        <p>分数最高的玩家从所有其它玩家手里赢得（二人分差的绝对值）*（总倍率）的筹码,N局游戏后,筹码最多的玩家获胜,中途有玩家筹码小于等于0,则该玩家被击飞,游戏直接结束.</p>\
+        <h3>奖励分</h3>\
+        <p>双对 :10分 三连 :10分 葫芦:20分 四连:40分 五连 :100分 大顺子:60分 小顺子:30分</p>\
+        <h3>局内示意图</h3>\
+        <img src="img3/teach.jpg" class="teach_img">\
+        </div>\
+        <button class="back_open" onclick="backtoopen()">返回</button>\
+    </div>'
+    $(".open").append(txt1);
+}
+
+// 返回功能
+var backtoopen = function(){
+    $(".teach").hide();
+}
+
 // 添加玩家函数,写入总局数,创建类
 var add_player = function(){
     _data.players_begin = parseInt(_data.aiplayer) + parseInt(_data.players_begin);

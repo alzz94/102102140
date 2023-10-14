@@ -53,6 +53,59 @@ body{background-color: #17181A;}
     background-color: #C8BD88;
 }
 
+.how_play {
+    position: absolute;
+    top: 50%;
+    left: 43%;
+    height: 80px;
+    width: 230px;
+    border-radius: 20px;
+    background-color: #C8BD88;
+}
+
+.teach{
+    position: absolute;
+    z-index: 500;
+    top: 5%;
+    left: 6%;
+    height: 750px;
+    width: 1500px;
+    display: flex;
+    align-items: center; /*纵轴 */
+    border-radius: 10px;
+    background-color: #C8BD88;
+}
+
+.teach_play {
+    position: absolute;
+    top: 12%;
+    left: 5%;
+    height: 625px;
+    width: 1350px;
+    border-radius: 20px;
+    background-color: #C8BD88;
+}
+
+.teach_img {
+    position: absolute;
+    top: 42%;
+    left: 0%;
+    height: 390px;
+    width: 780px;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.back_open {
+    position: absolute;
+    top: 3%;
+    left: 1%;
+    height: 60px;
+    width: 160px;
+    border-radius: 20px;
+}
+
 /* 初始化选择 */
 .begin {
     position: absolute;
